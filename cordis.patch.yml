@@ -1,0 +1,87 @@
+# Bundle layer of dsh-whale-sight.
+#
+# One Host row registers the `watch_video` tool. Every field is optional; the
+# values below are the defaults, restated so the row shows what can be tuned.
+- insert:
+    - id: whale-sight
+      name: 'dsh-whale-sight'
+      config:
+        # Absolute path to ffmpeg. Empty means: $DSH_FFMPEG, then `ffmpeg` from PATH.
+        ffmpegPath: ''
+        # Absolute path to ffprobe. Empty means: sibling of ffmpeg, then PATH.
+        ffprobePath: ''
+        # Frames sampled when the caller does not ask for a number, and the hard cap.
+        defaultFrames: 8
+        maxFrames: 20
+        # Long edge of a contact-sheet cell, in pixels. Never upscales.
+        cellWidth: 320
+        # Long edge of one separate frame, in pixels. Never upscales.
+        frameWidth: 768
+        # JPEG quality handed to ffmpeg (2 = best, 31 = worst).
+        jpegQuality: 4
+        # Below this frame count the images come back one per frame.
+        gridWhenAtLeast: 5
+        # Where extracted frames are cached. Empty means $DSH_HOME/cache/dsh-whale-sight.
+        cacheDir: ''
+        # Longest clip read without an explicit start/end, in seconds.
+        maxSeconds: 1200
+        # Frame placement. "auto" scans a low-resolution proxy, takes one moment per
+        # detected shot, then drops moments that repeat the previous picture; "even"
+        # skips that pass and spaces frames evenly.
+        sampling: auto
+        # Proxy scan rate and the longest window that pass will read.
+        motionFps: 6
+        motionScanMaxSeconds: 600
+        # A cut is a change at least shotRatio times the clip median, above shotFloor,
+        # and no closer than minShotSeconds to the previous one.
+        shotRatio: 3
+        shotFloor: 0.05
+        minShotSeconds: 0.5
+        # Normalized thumbnail distance below which a moment counts as a repeat.
+        minCellNovelty: 0.02
+        # Read subtitle text the file already carries: an embedded text track, or a
+        # .srt/.vtt file saved beside the video.
+        subtitles: true
+        # Ask the mounted speech-to-text provider for a transcript. Without a provider
+        # the extracted WAV is saved and its path is reported instead.
+        transcript: true
+        # Language hint for the transcript and for choosing among subtitle tracks.
+        language: zh
+        # Seconds of audio prepared for transcription, and the subtitle character budget.
+        # whisper on CPU is roughly 1.5x the audio length, so keep this short.
+        maxAudioSeconds: 120
+        maxSubtitleChars: 6000
+        # Parallel ffmpeg decoders while building a storyboard.
+        frameConcurrency: 4
+        # Where a WAV is saved when no speech-to-text provider is mounted.
+        # Empty means the OS temp directory.
+        audioDir: ''
+        # URL sources: yt-dlp executable, download cache, and limits. Leave ytdlpPath
+        # empty to accept local files only.
+        ytdlpPath: ''
+        downloadDir: ''
+        maxDownloadHeight: 720
+        maxDownloadMB: 2048
+        downloadTimeoutMs: 600000
+        # An empty proxy disables environment proxies for the downloader; some Bilibili
+        # endpoints reset TLS when a proxy is in the way.
+        proxy: ''
+        cookiesFromBrowser: ''
+        # Bilibili videos use curl + WBI signing (Windows schannel TLS) instead of
+        # yt-dlp, because Python/OpenSSL handshakes are reset on some machines.
+        curlPath: curl.exe
+        # Bilibili login: point at a local credential JSON (lowercase keys) to unlock
+        # 1080P. The cookie is read at runtime and never written into this file.
+        bilibiliCookieFile: ''
+        bilibiliQuality: 80
+        bilibiliMaxHeight: 1080
+        allowedDomains:
+          - bilibili.com
+          - b23.tv
+          - youtube.com
+          - youtu.be
+        # Local whisper.cpp fallback, used only when the host mounts no speech-to-text
+        # provider. Both paths must be set to enable it.
+        whisperCppPath: ''
+        whisperModelPath: ''
+        whisperThreads: 4

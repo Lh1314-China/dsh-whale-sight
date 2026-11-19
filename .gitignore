@@ -1,0 +1,6 @@
+﻿node_modules/
+dist/
+*.tgz
+SHA256SUMS.txt
+.DS_Store
+Thumbs.db

@@ -1,0 +1,15 @@
+dsh-whale-sight
+Copyright (c) 2026 Lh1314-China
+
+This package is an independent implementation. Its result shape — an image content
+block carrying `attachmentId` / `mediaType` / `bytes` / `width` / `height` — and its
+ffmpeg frame-grab approach were learned by reading dsh-video-vision, which is
+distributed under the MIT License:
+
+  dsh-video-vision — https://github.com/listendh/dsh-video-vision
+  Copyright (c) listendh
+  MIT License
+
+No source file from that project is copied into this package. Functions here were
+written for this package, including its own sampling planner, grid planner, tool
+schema, envelope and reading protocol.

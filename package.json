@@ -1,0 +1,64 @@
+{
+  "name": "dsh-whale-sight",
+  "version": "0.10.1",
+  "description": "Video vision for DeepSeek Harness: sample a clip with ffmpeg, return timestamped frames or one labelled contact sheet as native image attachments.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "lib/*.js",
+    "scripts/audio-tag.py",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "NOTICE",
+    "LICENSE"
+  ],
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "compatibility": {
+      "dsh": ">=0.2.0",
+      "node": ">=20",
+      "profiles": [
+        "desktop",
+        "web"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "video",
+    "vision",
+    "ffmpeg",
+    "watch_video"
+  ],
+  "author": {
+    "name": "Lh1314-China",
+    "url": "https://github.com/Lh1314-China"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lh1314-China/dsh-whale-sight.git"
+  },
+  "homepage": "https://github.com/Lh1314-China/dsh-whale-sight#readme",
+  "bugs": {
+    "url": "https://github.com/Lh1314-China/dsh-whale-sight/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "check": "node --check index.js && node --check lib/plan.js && node --check lib/ffmpeg.js",
+    "test": "node --test test/unit/*.test.js"
+  }
+}
