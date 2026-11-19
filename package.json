@@ -1,6 +1,6 @@
 {
   "name": "dsh-whale-sight",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Video vision for DeepSeek Harness: sample a clip with ffmpeg, return timestamped frames or one labelled contact sheet as native image attachments.",
   "type": "module",
   "main": "./index.js",
@@ -12,6 +12,7 @@
     "index.js",
     "lib/*.js",
     "scripts/audio-tag.py",
+    "scripts/install-engines.ps1",
     "cordis.patch.yml",
     "README.md",
     "CHANGELOG.md",

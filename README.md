@@ -27,6 +27,33 @@ dsh plugin --profile desktop add github:Lh1314-China/dsh-whale-sight
 除了 ffmpeg/ffprobe 不需要任何其它外部程序；B 站链接用 Windows 自带的
 `curl.exe`（Win10 1803+），YouTube 等其它域名才需要 `ytdlpPath`。
 
+## 引擎安装（显式，可选）
+
+没装 ffmpeg 也能装上插件，只是第一次调用 `watch_video` 时会报错。想省事可以
+用插件自带的安装器：
+
+```powershell
+# 只看当前状态，不下载任何东西
+.\scripts\install-engines.ps1
+
+# 下载 ffmpeg + ffprobe（LGPL 构建，约 79 MB）
+.\scripts\install-engines.ps1 -FFmpeg
+
+# 顺带装 yt-dlp（只有 YouTube 等非 B 站链接才需要）
+.\scripts\install-engines.ps1 -FFmpeg -YtDlp
+
+# 只看计划，不下载
+.\scripts\install-engines.ps1 -FFmpeg -DryRun
+```
+
+- 每个压缩包都按**发布方 GitHub Release 里的 `digest`** 校验 SHA-256；
+  不符就中止、删掉下载，不会装上坏东西。
+- 不静默安装、不要管理员权限；装完把路径写进
+  `%LOCALAPPDATA%\dsh-whale-sight\engines\engines.txt`，并打印该怎么填配置。
+- ffmpeg 用的是 **LGPL** 构建（不含 GPL-only 组件）；脚本会打印来源与许可，
+  二进制由你本人从上游取得，请按该构建自带的许可证使用。
+- **插件包不捆绑任何二进制**，所以包体积仍然只有几十 KB。
+
 ## 工具：`watch_video`
 
 | 参数 | 说明 |

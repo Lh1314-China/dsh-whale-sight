@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.2（2026-11-20）
+
+新增引擎安装器，但**不改变默认行为**：没有开关就不会下载任何东西。
+
+- `scripts/install-engines.ps1`：`-FFmpeg` 下载 ffmpeg/ffprobe（LGPL 构建），
+  `-YtDlp` 下载 yt-dlp；`-DryRun` 只打印计划；不带开关时只报告当前状态。
+- 每个下载都按发布方 GitHub Release 的 `digest` 校验 SHA-256，不符即中止并删除，
+  不静默安装、不需要管理员权限。
+- 安装位置固定为 `%LOCALAPPDATA%\dsh-whale-sight\engines\ffmpeg\bin`，并把路径写进
+  `engines.txt`；已经下载过的同版本文件会复用（同样先校验）。
+- 包体不捆绑二进制；`files` 白名单加入这个脚本。
+
 ## 0.10.1（2026-11-17）
 
 声音事件不再被转写开关连带关掉。
