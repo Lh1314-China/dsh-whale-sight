@@ -144,3 +144,16 @@ node scripts/local-check.mjs <clip.mp4> <outDir>   # 产出 cell-XX.jpg 与 shee
 
 图片附件与 ffmpeg 取帧的接法参考了 [dsh-video-vision](https://github.com/listendh/dsh-video-vision)
 （MIT，作者 listendh）。本包是独立实现，工具名、缓存与配置都不与它共享。
+
+## 许可与声明
+
+- 本包以 **MIT** 许可发布，见 [LICENSE](LICENSE)。
+- **不捆绑 ffmpeg**：请自行安装 `ffmpeg` / `ffprobe`，并遵守你所用那份构建的许可
+  （Windows 常见构建有 GPL / LGPL 之分）。
+- **不下载模型**：whisper.cpp 模型、语音转写 provider 都由使用者自行准备；
+  音频事件标注需要你自己的 Python 环境。
+- **网络边界**：只有你显式给出 `http(s)` 链接时才会出站（B 站走 `curl.exe`，
+  其它白名单域名走 yt-dlp）；本地文件不会上传。下载内容仅供自己有权访问的用途，
+  请遵守相应平台条款。
+- 抽出的帧、接触表和缓存的视频都留在本机（`DSH_HOME` 与 `downloadDir`），
+  插件不自动删除。
